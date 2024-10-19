@@ -22,7 +22,7 @@ export const GET: RequestHandler = async ({ url, fetch, locals }) => {
 
     try {
         //const response = await fetch(`https://${oktaDomain}/api/logs?${query}`, {
-        const response = await fetch(`https://${oktaDomain}/api/v1/logs`, {
+        const response = await fetch(`https://${oktaDomain}/api/v1/logs?limit=5`, {
                 headers: {
                 'Authorization': `Bearer ${session.user?.accessToken ?? ''}`,
                 'Accept': "application/json",

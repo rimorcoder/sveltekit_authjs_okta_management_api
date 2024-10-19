@@ -13,9 +13,8 @@
     <div class="flex items-center">
         <a class="btn btn-ghost text-xl" href="/">OAuth for Okta</a>
         <ul class="menu menu-horizontal px-1">
-            <li><a href="/logs">Logs</a></li>
-            <!-- <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li> -->
+            <li><a class:active={$page.url.pathname === '/users'} href="/users">Users</a></li>
+            <li><a class:active={$page.url.pathname === '/logs'} href="/logs">Logs</a></li>
         </ul>
     </div>
     <div class="flex-none">

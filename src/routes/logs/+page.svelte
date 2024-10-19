@@ -26,8 +26,6 @@
     }
 </script>
 
-<h1>Logs</h1>
-
 <button class="btn btn-primary" on:click={handleSearch}>Refresh Logs</button>
 
 {#if isLoading}

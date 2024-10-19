@@ -1,6 +1,6 @@
 # SvelteKit Auth with Auth.js for Okta API Management
 
-This app demonstrates how to interact with Okta APIs by using scoped OAuth 2.0 access tokens.
+This app demonstrates how to interact with Okta APIs by using scoped OAuth 2.0 access tokens. This is for testing purposes only.
 See https://developer.okta.com/docs/guides/implement-oauth-for-okta/main/
 
 ## Install
