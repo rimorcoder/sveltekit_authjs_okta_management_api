@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - AUTH_SECRET=${AUTH_SECRET}
+      - AUTH_TRUST_HOST=TRUE
+      - AUTH_OKTA_ID=${AUTH_OKTA_ID}
+      - AUTH_OKTA_SECRET=${AUTH_OKTA_SECRET}
+      - AUTH_OKTA_ISSUER=${AUTH_OKTA_ISSUER}
+      - AUTH_AUTH0_ID=${AUTH_AUTH0_ID}
+      - AUTH_AUTH0_SECRET=${AUTH_AUTH0_SECRET}
+      - AUTH_AUTH0_ISSUER=${AUTH_AUTH0_ISSUER}
+      - ORIGIN=http://localhost:3000
