@@ -59,6 +59,13 @@
         {/if}
     </div>
 </div>
-<main class="container px-4 py-8">
-    <slot />
+
+<div class="bg-orange-300 text-black h-5 w-full flex items-center justify-center font-bold text-sm">
+  FOR TESTING ONLY
+</div>
+
+<main class="container mx-auto px-4 py-8 flex justify-center min-h-[calc(100vh-8rem)]">
+    <div class="w-full">
+        <slot />
+    </div>
 </main>
