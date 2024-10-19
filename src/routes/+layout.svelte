@@ -12,10 +12,12 @@
 <div class="navbar bg-base-300 flex justify-between">
     <div class="flex items-center">
         <a class="btn btn-ghost text-xl" href="/">OAuth for Okta</a>
-        <ul class="menu menu-horizontal px-1">
-            <li><a class:active={$page.url.pathname === '/users'} href="/users">Users</a></li>
-            <li><a class:active={$page.url.pathname === '/logs'} href="/logs">Logs</a></li>
-        </ul>
+        {#if $page.data.session?.user}
+            <ul class="menu menu-horizontal px-1">
+                <!-- <li><a class:active={$page.url.pathname === '/users'} href="/users">Users</a></li> -->
+                <li><a class:active={$page.url.pathname === '/logs'} href="/logs">Logs</a></li>
+            </ul>
+        {/if}
     </div>
     <div class="flex-none">
         {#if $page.data.session?.user}

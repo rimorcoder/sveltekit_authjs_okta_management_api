@@ -1,38 +1,56 @@
 <script lang="ts">
-    import LogTable from "$lib/LogTable/+page.svelte";
-    import LogList from "$lib/LogList/+page.svelte";
-    let searchQuery = "";
+    import LogList from "$lib/components/LogList/+page.svelte";
+
+    let searchQuery = "limit=10&sortOrder=DESCENDING";
+    let searchInput: string = "";
     let isLoading = false;
     let error: string | null = null;
     let logs: any[] = [];
 
     async function handleSearch() {
         isLoading = true;
+        let updatedQuery = searchQuery;
         try {
+            if (searchInput.trim()) {
+                const encodedInput = encodeURIComponent(searchInput.trim());
+                updatedQuery += (searchQuery ? "&" : "") + `q=${encodedInput}`;
+            }
+            
             const response = await fetch(
-                `/api/logs?query=${encodeURIComponent(searchQuery)}`,
+                `/api/logs?query=${encodeURIComponent(updatedQuery)}`,
             );
             if (!response.ok) {
-                throw new Error("Failed to fetch search results");
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Failed to fetch logs');
             }
-            const data = await response.json();
-            logs = data;
+            logs = await response.json();
         } catch (err) {
-            error = "An error occurred while searching. Please try again.";
-            console.error(err);
+            error = err instanceof Error ? err.message : String(err);
         } finally {
             isLoading = false;
         }
     }
 </script>
 
-<div class="flex justify-between">
-    <button class="btn btn-primary" on:click={handleSearch}>Get Logs</button>
+<div class="flex flex-col gap-4">
+    <div class="flex items-end gap-4">
+        <div class="flex-grow">
+            <label for="searchInput" class="block mb-2 text-sm font-medium">Search:</label>
+            <input
+                type="text"
+                id="searchInput"
+                bind:value={searchInput}
+                class="w-full p-2 border rounded"
+                placeholder="Enter search terms"
+            />
+        </div>
+        <button class="btn btn-primary" on:click={handleSearch}>Get Logs</button>
+    </div>
 </div>
 
-<div class="overflow-x-auto">
+<div class="flex flex-col items-center h-screen px-4 pt-8">
     {#if isLoading}
-        <p>Loading...</p>
+        <span class="loading loading-ring loading-lg"></span>
     {:else if error}
         <div class="alert alert-error">
             <svg
